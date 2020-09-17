@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TechnologyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cargo">
+    <Key>
+      <PropertyRef Name="idCargo" />
+    </Key>
+    <Property Name="idCargo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nomCargo" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="idCategoria" />
+    </Key>
+    <Property Name="idCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nomCategoria" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="idCliente" />
+    </Key>
+    <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nomCliente" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="apeCliente" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="dniCliente" Type="char" MaxLength="8" Nullable="false" />
+    <Property Name="tlfCliente" Type="varchar" MaxLength="15" />
+    <Property Name="direcCliente" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="idDistrito" Type="int" Nullable="false" />
+    <Property Name="emailCliente" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="passCliente" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="idTipoUsuario" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Compra_Cabecera">
+    <Key>
+      <PropertyRef Name="idCompra" />
+    </Key>
+    <Property Name="idCompra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idCliente" Type="int" Nullable="false" />
+    <Property Name="fec_ped_comp" Type="datetime" Nullable="false" />
+    <Property Name="fec_ent_comp" Type="datetime" Nullable="false" />
+    <Property Name="monto" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Compra_Detalle">
+    <Key>
+      <PropertyRef Name="idCompra" />
+      <PropertyRef Name="idProducto" />
+    </Key>
+    <Property Name="idCompra" Type="int" Nullable="false" />
+    <Property Name="idProducto" Type="int" Nullable="false" />
+    <Property Name="precio" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Distrito">
+    <Key>
+      <PropertyRef Name="idDistrito" />
+    </Key>
+    <Property Name="idDistrito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nomDistrito" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Empleado">
+    <Key>
+      <PropertyRef Name="idEmpleado" />
+    </Key>
+    <Property Name="idEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nomEmpleado" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="apeEmpleado" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="dniEmpleado" Type="char" MaxLength="8" Nullable="false" />
+    <Property Name="tlfEmpleado" Type="varchar" MaxLength="15" />
+    <Property Name="direcEmpleado" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="idDistrito" Type="int" Nullable="false" />
+    <Property Name="idCargo" Type="int" Nullable="false" />
+    <Property Name="emailEmpleado" Type="varchar" MaxLength="50" />
+    <Property Name="passEmpleado" Type="varchar" MaxLength="30" />
+    <Property Name="idTipoUsuario" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="idProducto" />
+    </Key>
+    <Property Name="idProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="desProducto" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="idCategoria" Type="int" Nullable="false" />
+    <Property Name="precioProducto" Type="money" Nullable="false" />
+    <Property Name="stock_act" Type="int" Nullable="false" />
+    <Property Name="stock_min" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tipo_Usuario">
+    <Key>
+      <PropertyRef Name="idTipoUsuario" />
+    </Key>
+    <Property Name="idTipoUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nomTipoUsuario" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_CARGO_EMP">
+    <End Role="Cargo" Type="Self.Cargo" Multiplicity="1" />
+    <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cargo">
+        <PropertyRef Name="idCargo" />
+      </Principal>
+      <Dependent Role="Empleado">
+        <PropertyRef Name="idCargo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CAT_PROD">
+    <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="idCategoria" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="idCategoria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CLI_COMPRA">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Compra_Cabecera" Type="Self.Compra_Cabecera" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="idCliente" />
+      </Principal>
+      <Dependent Role="Compra_Cabecera">
+        <PropertyRef Name="idCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COMPCABE_DETA">
+    <End Role="Compra_Cabecera" Type="Self.Compra_Cabecera" Multiplicity="1" />
+    <End Role="Compra_Detalle" Type="Self.Compra_Detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Compra_Cabecera">
+        <PropertyRef Name="idCompra" />
+      </Principal>
+      <Dependent Role="Compra_Detalle">
+        <PropertyRef Name="idCompra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DIST_CLI">
+    <End Role="Distrito" Type="Self.Distrito" Multiplicity="1" />
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Distrito">
+        <PropertyRef Name="idDistrito" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="idDistrito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DIST_EMP">
+    <End Role="Distrito" Type="Self.Distrito" Multiplicity="1" />
+    <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Distrito">
+        <PropertyRef Name="idDistrito" />
+      </Principal>
+      <Dependent Role="Empleado">
+        <PropertyRef Name="idDistrito" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRODUCTO_DETA">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+    <End Role="Compra_Detalle" Type="Self.Compra_Detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="idProducto" />
+      </Principal>
+      <Dependent Role="Compra_Detalle">
+        <PropertyRef Name="idProducto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TIPOUSU_CLI">
+    <End Role="Tipo_Usuario" Type="Self.Tipo_Usuario" Multiplicity="1" />
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_Usuario">
+        <PropertyRef Name="idTipoUsuario" />
+      </Principal>
+      <Dependent Role="Cliente">
+        <PropertyRef Name="idTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TIPOUSU_EMP">
+    <End Role="Tipo_Usuario" Type="Self.Tipo_Usuario" Multiplicity="1" />
+    <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_Usuario">
+        <PropertyRef Name="idTipoUsuario" />
+      </Principal>
+      <Dependent Role="Empleado">
+        <PropertyRef Name="idTipoUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="usp_detalle_producto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cod" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_listar_productos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_logincliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="pass" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="TechnologyModelStoreContainer">
+    <EntitySet Name="Cargo" EntityType="Self.Cargo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Compra_Cabecera" EntityType="Self.Compra_Cabecera" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Compra_Detalle" EntityType="Self.Compra_Detalle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Distrito" EntityType="Self.Distrito" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tipo_Usuario" EntityType="Self.Tipo_Usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CARGO_EMP" Association="Self.FK_CARGO_EMP">
+      <End Role="Cargo" EntitySet="Cargo" />
+      <End Role="Empleado" EntitySet="Empleado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CAT_PROD" Association="Self.FK_CAT_PROD">
+      <End Role="Categoria" EntitySet="Categoria" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CLI_COMPRA" Association="Self.FK_CLI_COMPRA">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Compra_Cabecera" EntitySet="Compra_Cabecera" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COMPCABE_DETA" Association="Self.FK_COMPCABE_DETA">
+      <End Role="Compra_Cabecera" EntitySet="Compra_Cabecera" />
+      <End Role="Compra_Detalle" EntitySet="Compra_Detalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DIST_CLI" Association="Self.FK_DIST_CLI">
+      <End Role="Distrito" EntitySet="Distrito" />
+      <End Role="Cliente" EntitySet="Cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DIST_EMP" Association="Self.FK_DIST_EMP">
+      <End Role="Distrito" EntitySet="Distrito" />
+      <End Role="Empleado" EntitySet="Empleado" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRODUCTO_DETA" Association="Self.FK_PRODUCTO_DETA">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="Compra_Detalle" EntitySet="Compra_Detalle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TIPOUSU_CLI" Association="Self.FK_TIPOUSU_CLI">
+      <End Role="Tipo_Usuario" EntitySet="Tipo_Usuario" />
+      <End Role="Cliente" EntitySet="Cliente" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TIPOUSU_EMP" Association="Self.FK_TIPOUSU_EMP">
+      <End Role="Tipo_Usuario" EntitySet="Tipo_Usuario" />
+      <End Role="Empleado" EntitySet="Empleado" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

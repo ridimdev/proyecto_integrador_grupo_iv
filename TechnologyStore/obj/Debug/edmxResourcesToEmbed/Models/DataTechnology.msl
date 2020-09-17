@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TechnologyModelStoreContainer" CdmEntityContainer="TechnologyEntities1">
+    <EntitySetMapping Name="Cargo">
+      <EntityTypeMapping TypeName="TechnologyModel.Cargo">
+        <MappingFragment StoreEntitySet="Cargo">
+          <ScalarProperty Name="idCargo" ColumnName="idCargo" />
+          <ScalarProperty Name="nomCargo" ColumnName="nomCargo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categoria">
+      <EntityTypeMapping TypeName="TechnologyModel.Categoria">
+        <MappingFragment StoreEntitySet="Categoria">
+          <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+          <ScalarProperty Name="nomCategoria" ColumnName="nomCategoria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="TechnologyModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
+          <ScalarProperty Name="apeCliente" ColumnName="apeCliente" />
+          <ScalarProperty Name="dniCliente" ColumnName="dniCliente" />
+          <ScalarProperty Name="tlfCliente" ColumnName="tlfCliente" />
+          <ScalarProperty Name="direcCliente" ColumnName="direcCliente" />
+          <ScalarProperty Name="idDistrito" ColumnName="idDistrito" />
+          <ScalarProperty Name="emailCliente" ColumnName="emailCliente" />
+          <ScalarProperty Name="passCliente" ColumnName="passCliente" />
+          <ScalarProperty Name="idTipoUsuario" ColumnName="idTipoUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Compra_Cabecera">
+      <EntityTypeMapping TypeName="TechnologyModel.Compra_Cabecera">
+        <MappingFragment StoreEntitySet="Compra_Cabecera">
+          <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="fec_ped_comp" ColumnName="fec_ped_comp" />
+          <ScalarProperty Name="fec_ent_comp" ColumnName="fec_ent_comp" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Compra_Detalle">
+      <EntityTypeMapping TypeName="TechnologyModel.Compra_Detalle">
+        <MappingFragment StoreEntitySet="Compra_Detalle">
+          <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+          <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Distrito">
+      <EntityTypeMapping TypeName="TechnologyModel.Distrito">
+        <MappingFragment StoreEntitySet="Distrito">
+          <ScalarProperty Name="idDistrito" ColumnName="idDistrito" />
+          <ScalarProperty Name="nomDistrito" ColumnName="nomDistrito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empleado">
+      <EntityTypeMapping TypeName="TechnologyModel.Empleado">
+        <MappingFragment StoreEntitySet="Empleado">
+          <ScalarProperty Name="idEmpleado" ColumnName="idEmpleado" />
+          <ScalarProperty Name="nomEmpleado" ColumnName="nomEmpleado" />
+          <ScalarProperty Name="apeEmpleado" ColumnName="apeEmpleado" />
+          <ScalarProperty Name="dniEmpleado" ColumnName="dniEmpleado" />
+          <ScalarProperty Name="tlfEmpleado" ColumnName="tlfEmpleado" />
+          <ScalarProperty Name="direcEmpleado" ColumnName="direcEmpleado" />
+          <ScalarProperty Name="idDistrito" ColumnName="idDistrito" />
+          <ScalarProperty Name="idCargo" ColumnName="idCargo" />
+          <ScalarProperty Name="emailEmpleado" ColumnName="emailEmpleado" />
+          <ScalarProperty Name="passEmpleado" ColumnName="passEmpleado" />
+          <ScalarProperty Name="idTipoUsuario" ColumnName="idTipoUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producto">
+      <EntityTypeMapping TypeName="TechnologyModel.Producto">
+        <MappingFragment StoreEntitySet="Producto">
+          <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+          <ScalarProperty Name="desProducto" ColumnName="desProducto" />
+          <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+          <ScalarProperty Name="precioProducto" ColumnName="precioProducto" />
+          <ScalarProperty Name="stock_act" ColumnName="stock_act" />
+          <ScalarProperty Name="stock_min" ColumnName="stock_min" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tipo_Usuario">
+      <EntityTypeMapping TypeName="TechnologyModel.Tipo_Usuario">
+        <MappingFragment StoreEntitySet="Tipo_Usuario">
+          <ScalarProperty Name="idTipoUsuario" ColumnName="idTipoUsuario" />
+          <ScalarProperty Name="nomTipoUsuario" ColumnName="nomTipoUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="usp_logincliente" FunctionName="TechnologyModel.Store.usp_logincliente" />
+    <FunctionImportMapping FunctionImportName="usp_listar_productos" FunctionName="TechnologyModel.Store.usp_listar_productos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TechnologyModel.usp_listar_productos_Result">
+          <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+          <ScalarProperty Name="desProducto" ColumnName="desProducto" />
+          <ScalarProperty Name="precioProducto" ColumnName="precioProducto" />
+          <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+          <ScalarProperty Name="nomCategoria" ColumnName="nomCategoria" />
+          <ScalarProperty Name="stock_act" ColumnName="stock_act" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_detalle_producto" FunctionName="TechnologyModel.Store.usp_detalle_producto">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TechnologyModel.usp_detalle_producto_Result">
+          <ScalarProperty Name="idProducto" ColumnName="idProducto" />
+          <ScalarProperty Name="desProducto" ColumnName="desProducto" />
+          <ScalarProperty Name="precioProducto" ColumnName="precioProducto" />
+          <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+          <ScalarProperty Name="nomCategoria" ColumnName="nomCategoria" />
+          <ScalarProperty Name="stock_act" ColumnName="stock_act" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>
